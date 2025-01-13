@@ -1,0 +1,361 @@
+{
+  "name": "new-vscode-avdmanager",
+  "displayName": "AVD Manager",
+  "description": "Android Virtual Device Manager for VSCode",
+  "publisher": "Guangyu",
+  "license": "MIT",
+  "version": "1.5.0",
+  "icon": "resources/logo.png",
+  "keywords": [
+    "psi",
+    "tx",
+    "avd",
+    "avdmanager",
+    "android",
+    "android studio",
+    "emulator",
+    "sdk",
+    "sdkmanager"
+  ],
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:avdmanager-avd",
+    "onCommand:avdmanager.avdlist-refresh",
+    "onView:avdmanager-sdk-platforms",
+    "onCommand:avdmanager.sdk-platforms-refresh",
+    "onView:avdmanager-sdk-tools",
+    "onCommand:avdmanager.sdk-tools-refresh",
+    "onCommand:avdmanager.pkg-accept-license",
+    "onCommand:avdmanager.pkg-update-all",
+    "onCommand:avdmanager.setup-sdkpath",
+    "onCommand:avdmanager.setup-avdmanager",
+    "onCommand:avdmanager.setup-sdkmanager",
+    "onCommand:avdmanager.setup-emulator"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "views": {
+      "avdmanager": [
+        {
+          "id": "avdmanager-avd",
+          "name": "Android Virtual Device",
+          "contextualTitle": "AVD Manager - Android Virtual Device",
+          "icon": "resources/icon.svg",
+          "visibility": "visible"
+        },
+        {
+          "id": "avdmanager-sdk-platforms",
+          "name": "SDK Platforms",
+          "contextualTitle": "Android - SDK Platforms",
+          "icon": "resources/icon.svg",
+          "visibility": "visible"
+        },
+        {
+          "id": "avdmanager-sdk-tools",
+          "name": "SDK Tools",
+          "contextualTitle": "Android - SDK Tools",
+          "icon": "resources/icon.svg",
+          "visibility": "visible"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "avdmanager",
+          "title": "AVDManager",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "colors": [
+      {
+        "id": "avdmanager.pkgFolderInstalled",
+        "description": "Color for folder with installed package.",
+        "defaults": {
+          "dark": "#090",
+          "light": "#090",
+          "highContrast": "#090"
+        }
+      },
+      {
+        "id": "avdmanager.pkgInstalled",
+        "description": "Color for installed package icon.",
+        "defaults": {
+          "dark": "#090",
+          "light": "#090",
+          "highContrast": "#090"
+        }
+      },
+      {
+        "id": "avdmanager.pkgNotInstall",
+        "description": "Color for not installed package icon.",
+        "defaults": {
+          "dark": "#999",
+          "light": "#999",
+          "highContrast": "#999"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "avdmanager.setup-avdmanager",
+        "title": "Update AVD Manager Path",
+        "category": "AVDManager📱"
+      },
+      {
+        "command": "avdmanager.setup-sdkmanager",
+        "title": "Update SDK Manager Path",
+        "category": "AVDManager📱"
+      },
+      {
+        "command": "avdmanager.setup-emulator",
+        "title": "Update Emulator Path",
+        "category": "AVDManager📱"
+      },
+      {
+        "command": "avdmanager.setup-sdkpath",
+        "title": "Update SDK Root Path",
+        "category": "AVDManager📱"
+      },
+      {
+        "command": "avdmanager.avd-create",
+        "title": "Create",
+        "icon": "$(plus)"
+      },
+      {
+        "command": "avdmanager.avdlist-refresh",
+        "title": "Refresh AVD List",
+        "shortTitle": "Refresh",
+        "category": "AVDManager📱",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "avdmanager.avd-launch",
+        "title": "Launch",
+        "icon": "$(run)"
+      },
+      {
+        "command": "avdmanager.avd-edit",
+        "title": "Edit",
+        "icon": "$(notebook-edit)"
+      },
+      {
+        "command": "avdmanager.avd-showdir",
+        "title": "Open AVD folder",
+        "icon": "$(folder)"
+      },
+      {
+        "command": "avdmanager.avd-showconfigfile",
+        "title": "Open AVD config.ini",
+        "icon": "$(preferences-open-settings)"
+      },
+      {
+        "command": "avdmanager.avd-delete",
+        "title": "Delete",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "avdmanager.sdk-platforms-refresh",
+        "title": "Refresh SDK Platforms List",
+        "shortTitle": "Refresh",
+        "category": "AVDManager📱",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "avdmanager.sdk-tools-refresh",
+        "title": "Refresh SDK Tools List",
+        "shortTitle": "Refresh",
+        "category": "AVDManager📱",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "avdmanager.pkg-uninstall",
+        "title": "Uninstall",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "avdmanager.pkg-install",
+        "title": "Install",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "avdmanager.pkg-update-all",
+        "title": "Update All SDK Package",
+        "category": "AVDManager📱",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "avdmanager.pkg-accept-license",
+        "title": "Accept All SDK Licenses",
+        "category": "AVDManager📱",
+        "icon": "$(check-all)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "avdmanager.avdlist-refresh",
+          "when": "view == avdmanager-avd",
+          "group": "navigation@2"
+        },
+        {
+          "command": "avdmanager.sdk-platforms-refresh",
+          "when": "view == avdmanager-sdk-platforms",
+          "group": "navigation@5"
+        },
+        {
+          "command": "avdmanager.sdk-tools-refresh",
+          "when": "view == avdmanager-sdk-tools",
+          "group": "navigation@5"
+        },
+        {
+          "command": "avdmanager.pkg-accept-license",
+          "when": "view == avdmanager-sdk-platforms || view == avdmanager-sdk-tools",
+          "group": "navigation@1"
+        },
+        {
+          "command": "avdmanager.pkg-update-all",
+          "when": "view == avdmanager-sdk-platforms || view == avdmanager-sdk-tools",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "avdmanager.avd-launch",
+          "when": "view == avdmanager-avd && viewItem == avd",
+          "group": "inline@1"
+        },
+        {
+          "command": "avdmanager.avd-edit",
+          "when": "view == avdmanager-avd && viewItem == avd",
+          "group": "inline@2"
+        },
+        {
+          "command": "avdmanager.avd-showconfigfile",
+          "when": "view == avdmanager-avd",
+          "group": "inline@3"
+        },
+        {
+          "command": "avdmanager.avd-showdir",
+          "when": "view == avdmanager-avd",
+          "group": "inline@4"
+        },
+        {
+          "command": "avdmanager.avd-delete",
+          "when": "view == avdmanager-avd",
+          "group": "avd-menu@3"
+        },
+        {
+          "command": "avdmanager.avd-create",
+          "when": "view == avdmanager-sdk-platforms && viewItem == sdk-pkg-installed-img",
+          "group": "inline@1"
+        },
+        {
+          "command": "avdmanager.pkg-install",
+          "when": "view =~ /^avdmanager-sdk/ && viewItem == sdk-pkg",
+          "group": "inline@2"
+        },
+        {
+          "command": "avdmanager.pkg-uninstall",
+          "when": "view =~ /^avdmanager-sdk/ && viewItem =~ /^sdk-pkg-installed/",
+          "group": "inline@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AVD Manager",
+      "type": "object",
+      "properties": {
+        "avdmanager.sdkPath": {
+          "title": "Android SDK Root Path",
+          "type": "string",
+          "default": "",
+          "markdownDescription": "The location of the Android SDK Root Path. If blank, it will attempt to find it from the `ANDROID_SDK_ROOT` or `ANDROID_HOME` environment variable."
+        },
+        "avdmanager.avdHome": {
+          "title": "Android AVD Home Path",
+          "type": "string",
+          "default": "",
+          "markdownDescription": "The location of the Android AVD Home Path. If blank, it will attempt to find it from the `ANDROID_AVD_HOME` environment variable or SDK Default."
+        },
+        "avdmanager.cmdVersion": {
+          "title": "Android Command-Line Tools Version",
+          "type": "string",
+          "default": "latest",
+          "description": "Android SDK Command-Line Tools Version"
+        },
+        "avdmanager.executable": {
+          "title": "AVD Manager executable (optional)",
+          "type": "string",
+          "default": "avdmanager",
+          "description": "AVD Manager executable path"
+        },
+        "avdmanager.sdkManager": {
+          "title": "Android SDK Manager executable (optional)",
+          "type": "string",
+          "default": "sdkmanager",
+          "description": "Android SDK Manager executable path"
+        },
+        "avdmanager.emulator": {
+          "title": "Android Emulator executable (optional)",
+          "type": "string",
+          "default": "emulator",
+          "description": "Android Emulator executable path"
+        },
+        "avdmanager.emulatorOpt": {
+          "title": "Android emulator options (optional)",
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Android emulator options. [Start the emulator from the command line](https://developer.android.com/studio/run/emulator-commandline)"
+        }
+      }
+    }
+  },
+  "capabilities": {
+    "virtualWorkspaces": true,
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^14.18.63",
+    "@types/vscode": "^1.60.0",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "@vscode/test-electron": "^2.1.2",
+    "eslint": "^8.9.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "vscode": "^1.1.37",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toroxx/vscode-avdmanager.git"
+  },
+  "dependencies": {
+    "grep": "^0.1.0"
+  }
+}
